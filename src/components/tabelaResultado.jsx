@@ -6,7 +6,7 @@ export default props => {
     return (
 
         <div>
-            {props.imc != "" && props.mensagem != "" ?
+            {props.imc != 0 && props.mensagem != "" ?
                 <Table striped bordered>
                     <thead>
                         <tr>

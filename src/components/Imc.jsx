@@ -26,15 +26,9 @@ export default class Imc extends React.Component {
         this.imcIdoso = this.imcIdoso.bind(this)
         this.radio1 = this.radio1.bind(this)
         this.radio2 = this.radio2.bind(this)
-
-
-
-
-
     }
 
     altura(event) {
-        console.log(event.target.value)
         this.setState({
             altura: event.target.value
         })
@@ -48,11 +42,9 @@ export default class Imc extends React.Component {
 
     imcAdulto() {
         const { altura, peso } = this.state
-
         const imc = (parseFloat(peso) / (parseFloat(altura) * parseFloat(altura)))
         const resultadoIMC = imc.toFixed(2)
 
-        console.log(resultadoIMC)
         if (resultadoIMC < 18.5) {
             var mensagem = 'Baixo peso'
         }
@@ -71,6 +63,7 @@ export default class Imc extends React.Component {
             var mensagem = 'Obesidade de Classe 3'
         }
 
+        console.log(mensagem)
         this.setState({
             imc: resultadoIMC,
             mensagem: mensagem
@@ -79,7 +72,6 @@ export default class Imc extends React.Component {
 
     imcIdoso() {
         const { altura, peso } = this.state
-
         const imc = (parseFloat(peso) / (parseFloat(altura) * parseFloat(altura)))
         const resultadoIMC = imc.toFixed(2)
 
@@ -100,15 +92,16 @@ export default class Imc extends React.Component {
 
     calculaImc() {
         const { altura, peso, radio1, radio2 } = this.state
+
+
         if (altura != 0 && peso != 0 && radio1 != false || radio2 != false) {
             if (radio1 == true) {
                 this.imcIdoso()
             } else {
+                console.log("idoso")
+
                 this.imcAdulto()
-            }
-            this.setState({
-                mensagem: ""
-            })
+            }            
 
         } else {
             this.setState({
@@ -137,6 +130,7 @@ export default class Imc extends React.Component {
 
     render() {
         const { altura, peso, mensagem, imc, radio1, radio2 } = this.state
+        
         return (
             <div>
                 <h1>Calculadora IMC</h1>

@@ -21,7 +21,7 @@ export default props => {
                         </tr>
                     </tbody>
                 </Table>
-                : ""}
+                : props.mensagem}
 
         </div>
     )

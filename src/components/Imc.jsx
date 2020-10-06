@@ -63,7 +63,6 @@ export default class Imc extends React.Component {
             var mensagem = 'Obesidade de Classe 3'
         }
 
-        console.log(mensagem)
         this.setState({
             imc: resultadoIMC,
             mensagem: mensagem
@@ -94,22 +93,31 @@ export default class Imc extends React.Component {
         const { altura, peso, radio1, radio2 } = this.state
 
 
-        if (altura != 0 && peso != 0 && radio1 != false || radio2 != false) {
-            if (radio1 == true) {
-                this.imcIdoso()
+        if (radio1 != false || radio2 != false) {
+            if (altura != 0 && peso != 0) {
+                if (radio1 == true) {
+                    this.imcIdoso()
+                } else {
+                    this.imcAdulto()
+                }
             } else {
-                console.log("idoso")
-
-                this.imcAdulto()
-            }            
-
+                this.setState({
+                    mensagem: (
+                        <Alert variant="light">
+                            É preciso preencher os dois campos, e marcar sua faixa etária
+                        </Alert>
+                    ),
+                    imc: 0
+                })
+            }
         } else {
             this.setState({
                 mensagem: (
                     <Alert variant="light">
                         É preciso preencher os dois campos, e marcar sua faixa etária
                     </Alert>
-                )
+                ),
+                imc: 0
             })
         }
     }
@@ -166,7 +174,6 @@ export default class Imc extends React.Component {
                             </Form>
                         </Col>
                     </Row>
-                    {mensagem}
                     <TabelaResultado imc={imc} mensagem={mensagem}></TabelaResultado>
                 </div>
             </div>
